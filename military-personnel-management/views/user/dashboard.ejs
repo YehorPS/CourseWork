@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>User Dashboard</h1>
+    <form action="/user/add-soldier" method="POST">
+        <input type="text" name="firstName" placeholder="First Name" required>
+        <input type="text" name="lastName" placeholder="Last Name" required>
+        <input type="text" name="middleName" placeholder="Middle Name" required>
+        <input type="text" name="rank" placeholder="Rank" required>
+        <input type="number" name="birthYear" placeholder="Birth Year" required>
+        <input type="text" name="unitId" placeholder="Unit ID" required>
+        <input type="text" name="positionName" placeholder="Position Name" required>
+        <button type="submit">Add Soldier</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Middle Name</th>
+            <th>Rank</th>
+            <th>Birth Year</th>
+            <th>Action</th>
+        </tr>
+        <% soldiers.forEach(soldier => { %>
+            <tr>
+                <td><%= soldier.firstName %></td>
+                <td><%= soldier.lastName %></td>
+                <td><%= soldier.middleName %></td>
+                <td><%= soldier.rank %></td>
+                <td><%= soldier.birthYear %></td>
+                <td>
+                    <form action="/user/edit-soldier/<%= soldier._id %>" method="POST">
+                        <input type="text" name="firstName" value="<%= soldier.firstName %>" required>
+                        <input type="text" name="lastName" value="<%= soldier.lastName %>" required>
+                        <input type="text" name="middleName" value="<%= soldier.middleName %>" required>
+                        <input type="text" name="rank" value="<%= soldier.rank %>" required>
+                        <input type="number" name="birthYear" value="<%= soldier.birthYear %>" required>
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/user/delete-soldier/<%= soldier._id %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
